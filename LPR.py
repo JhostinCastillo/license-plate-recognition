@@ -5,7 +5,8 @@ import skimage
 pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files (x86)/Tesseract-OCR/tesseract.exe'
 
 class LPR:
-    def __init__(self, min_w=80, max_w=110, min_h=25, max_h=52, ratio=3.07692307692):
+    # 80,110,25,52
+    def __init__(self, min_w=40, max_w=120, min_h=40, max_h=54, ratio=2.0079365079365084):
         self.min_w = min_w
         self.max_w = max_w
         self.min_h = min_h
@@ -16,7 +17,7 @@ class LPR:
         return cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     def apply_threshold(self, img):
-        return cv2.threshold(img, 170, 255, cv2.THRESH_BINARY_INV)[1]
+        return cv2.threshold(img, 100, 255, cv2.THRESH_BINARY_INV)[1]
 
     def apply_adaptive_threshold(self, img):
         return cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 7, 13)
